@@ -1,6 +1,7 @@
 package com.james.initializr.easyexcel;
 
 import com.alibaba.excel.context.AnalysisContext;
+import com.alibaba.excel.exception.ExcelDataConvertException;
 import com.alibaba.excel.metadata.CellData;
 import com.alibaba.excel.metadata.CellExtra;
 import com.alibaba.excel.read.listener.ReadListener;
@@ -71,7 +72,15 @@ public class UploadDataListener implements ReadListener<UploadData> {
     }
 
     @Override
-    public void onException(Exception e, AnalysisContext analysisContext) throws Exception {}
+    public void onException(Exception e, AnalysisContext context) {
+        if (e instanceof ExcelDataConvertException) {
+            ExcelDataConvertException excelDataConvertException = (ExcelDataConvertException) e;
+            Integer rowIndex = excelDataConvertException.getRowIndex();
+            Integer columnIndex = excelDataConvertException.getColumnIndex();
+        } else {
+            Integer rowIndex = context.readRowHolder().getRowIndex();
+        }
+    }
 
     @Override
     public void invokeHead(Map<Integer, CellData> map, AnalysisContext analysisContext) {}
