@@ -1,6 +1,7 @@
 package com.james.initializr.easyexcel;
 
 
+import com.alibaba.excel.EasyExcel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,9 +13,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 /**
  * web读写案例
@@ -70,7 +74,23 @@ public class WebTest {
     @PostMapping("uploadAndOtherParams")
     @ResponseBody
     public String uploadAndOtherParams(@RequestParam() MultiValueMap<String, MultipartFile> files, @RequestParam("orderId") String orderId) throws IOException {
+        List<UploadDataListener> result = new ArrayList<>();
+        for (Map.Entry<String, List<MultipartFile>> entry : files.entrySet()) {
+            List<MultipartFile> fileList = entry.getValue();
+            for (MultipartFile multipartFile : fileList) {
+                log.info("key : {} filename : {}", entry.getKey(), multipartFile.getOriginalFilename());
+                UploadDataListener listener = new UploadDataListener(uploadDAO);
+                result.add(listener);
+                EasyExcel
+                        .read(multipartFile.getInputStream(), UploadData.class, listener)
+                        .headRowNumber(1)
+                        .sheet(0)
+                        .doRead();
+            }
+        }
 
+        // TODO 收集解析好的数据
+        List<UploadData> allListener = result.stream().flatMap(r -> r.getCachedDataList().stream()).collect(Collectors.toList());
         return "success";
     }
 }

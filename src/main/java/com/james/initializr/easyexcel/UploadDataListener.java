@@ -7,8 +7,10 @@ import com.alibaba.excel.metadata.CellExtra;
 import com.alibaba.excel.read.listener.ReadListener;
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,10 +21,10 @@ import java.util.Map;
  * @author Jiaju Zhuang
  */
 @Slf4j
+@Data
 public class UploadDataListener implements ReadListener<UploadData> {
-    private static final int BATCH_COUNT = 100;
-    private List<UploadData> cachedDataList = Lists.newArrayListWithExpectedSize(BATCH_COUNT);
-    private final UploadDAO uploadDAO;
+    private List<UploadData> cachedDataList = new ArrayList<>();
+    private UploadDAO uploadDAO;
     public UploadDataListener(UploadDAO uploadDAO) {
         this.uploadDAO = uploadDAO;
     }
@@ -53,22 +55,12 @@ public class UploadDataListener implements ReadListener<UploadData> {
     @Override
     public void doAfterAllAnalysed(AnalysisContext context) {
         // 这里也要保存数据，确保最后遗留的数据也存储到数据库
-        saveData();
         log.info("所有数据解析完成！");
     }
 
     @Override
     public boolean hasNext(AnalysisContext analysisContext) {
-        return false;
-    }
-
-    /**
-     * 加上存储数据库
-     */
-    private void saveData() {
-        log.info("{}条数据，开始存储数据库！", cachedDataList.size());
-        uploadDAO.save(cachedDataList);
-        log.info("存储数据库成功！");
+        return true;
     }
 
     @Override
