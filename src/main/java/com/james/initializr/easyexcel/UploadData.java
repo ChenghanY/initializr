@@ -27,7 +27,7 @@ public class UploadData {
     private String string3;
 
     @ExcelProperty
-    private String string4;
+    private BigDecimal decimal;
 
     @ExcelProperty
     private String string5;
