@@ -10,7 +10,7 @@ import com.james.initializr.mapstruct.B_nestedmap.mapper.FishTankMapperExpressio
 import com.james.initializr.mapstruct.B_nestedmap.mapper.FishTankMapperWithDocument;
 import com.james.initializr.mapstruct.B_nestedmap.model.*;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 
@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Slf4j
-class B_NestedMappingTests {
+public class B_NestedMappingTests {
 
 	@Test
 	public void shouldAutomapAndHandleSourceAndTargetPropertyNesting() {

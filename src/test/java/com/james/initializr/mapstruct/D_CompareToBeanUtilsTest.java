@@ -6,7 +6,7 @@ import com.james.initializr.mapstruct.D_compare.dto.CustomerDto;
 import com.james.initializr.mapstruct.D_compare.mapper.CompareCustomerMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.BeanUtils;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.lang.reflect.InvocationTargetException;
@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @SpringBootTest
 @Slf4j
-class D_CompareToBeanUtilsTest {
+public class D_CompareToBeanUtilsTest {
 
 
 	@Test

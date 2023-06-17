@@ -5,7 +5,7 @@ import com.james.initializr.mapstruct.A_simple.dto.CustomerDto;
 import com.james.initializr.mapstruct.A_simple.dto.OrderItem;
 import com.james.initializr.mapstruct.A_simple.dto.OrderItemDto;
 import com.james.initializr.mapstruct.A_simple.mapper.CustomerMapper;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.tuple;
 
 
 @SpringBootTest
-class A_SimpleMappingTests {
+public class A_SimpleMappingTests {
 
 	@Test
 	public void testMapDtoToEntity() {

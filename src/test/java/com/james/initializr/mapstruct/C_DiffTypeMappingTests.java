@@ -5,7 +5,7 @@ import com.james.initializr.mapstruct.C_difftype.dto.Customer;
 import com.james.initializr.mapstruct.C_difftype.dto.CustomerDto;
 import com.james.initializr.mapstruct.C_difftype.mapper.DiffTypeCustomerMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @SpringBootTest
 @Slf4j
-class C_DiffTypeMappingTests {
+public class C_DiffTypeMappingTests {
 
 
 	@Test
