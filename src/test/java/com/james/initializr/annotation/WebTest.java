@@ -40,7 +40,7 @@ public class WebTest {
     @PostMapping("withParam")
     @ResponseBody
     @RequestWithJsonSchema
-    public JSONObject withParam(@RequestBody InputDTO dto) {
+    public JSONObject withParam(@RequestBody @JsonSchemaValidated InputDTO dto) {
 
         return new JSONObject();
     }
