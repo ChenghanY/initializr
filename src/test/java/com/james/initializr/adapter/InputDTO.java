@@ -1,4 +1,4 @@
-package com.james.initializr.annotation;
+package com.james.initializr.adapter;
 
 import com.alibaba.fastjson2.JSONObject;
 
@@ -7,7 +7,7 @@ import com.alibaba.fastjson2.JSONObject;
  */
 public class InputDTO {
 
-    @JsonSchemaValidated
+    @JsonValidated
     private JSONObject input;
 
     public JSONObject getInput() {
